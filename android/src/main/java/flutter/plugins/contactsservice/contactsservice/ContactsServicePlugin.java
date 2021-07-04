@@ -170,6 +170,7 @@ public class ContactsServicePlugin implements MethodCallHandler, FlutterPlugin, 
   private static final String[] PROJECTION =
           {
                   ContactsContract.Data.CONTACT_ID,
+                  ContactsContract.Data.LOOKUP_KEY,
                   ContactsContract.Profile.DISPLAY_NAME,
                   ContactsContract.Contacts.Data.MIMETYPE,
                   ContactsContract.RawContacts.ACCOUNT_TYPE,
@@ -558,6 +559,7 @@ public class ContactsServicePlugin implements MethodCallHandler, FlutterPlugin, 
       contact.displayName = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
       contact.androidAccountType = cursor.getString(cursor.getColumnIndex(ContactsContract.RawContacts.ACCOUNT_TYPE));
       contact.androidAccountName = cursor.getString(cursor.getColumnIndex(ContactsContract.RawContacts.ACCOUNT_NAME));
+      contact.lookupKey = cursor.getString(cursor.getColumnIndex(ContactsContract.Data.LOOKUP_KEY));
 
       //NAMES
       if (mimeType.equals(CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)) {

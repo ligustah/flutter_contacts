@@ -196,9 +196,11 @@ class Contact {
     this.androidAccountType,
     this.androidAccountTypeRaw,
     this.androidAccountName,
+    this.lookupKey,
   });
 
   String? identifier,
+     lookupKey,
       displayName,
       givenName,
       middleName,
@@ -234,6 +236,7 @@ class Contact {
     androidAccountTypeRaw = m["androidAccountType"];
     androidAccountType = accountTypeFromString(androidAccountTypeRaw);
     androidAccountName = m["androidAccountName"];
+    lookupKey = m["lookupKey"];
     emails = (m["emails"] as Iterable?)?.map((m) => Item.fromMap(m));
     phones = (m["phones"] as Iterable?)?.map((m) => Item.fromMap(m));
     postalAddresses = (m["postalAddresses"] as Iterable?)
@@ -276,6 +279,7 @@ class Contact {
       "jobTitle": contact.jobTitle,
       "androidAccountType": contact.androidAccountTypeRaw,
       "androidAccountName": contact.androidAccountName,
+      "lookupKey": contact.lookupKey,
       "emails": emails,
       "phones": phones,
       "postalAddresses": postalAddresses,
@@ -299,6 +303,7 @@ class Contact {
         jobTitle: this.jobTitle ?? other.jobTitle,
         androidAccountType: this.androidAccountType ?? other.androidAccountType,
         androidAccountName: this.androidAccountName ?? other.androidAccountName,
+        lookupKey: this.lookupKey ?? other.lookupKey,
         emails: this.emails == null
             ? other.emails
             : this
@@ -337,6 +342,7 @@ class Contact {
         this.jobTitle == other.jobTitle &&
         this.androidAccountType == other.androidAccountType &&
         this.androidAccountName == other.androidAccountName &&
+        this.lookupKey == other.lookupKey &&
         this.middleName == other.middleName &&
         this.prefix == other.prefix &&
         this.suffix == other.suffix &&
@@ -358,6 +364,7 @@ class Contact {
       this.jobTitle,
       this.androidAccountType,
       this.androidAccountName,
+      this.lookupKey,
       this.middleName,
       this.prefix,
       this.suffix,
