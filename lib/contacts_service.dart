@@ -242,10 +242,23 @@ class Contact {
     postalAddresses = (m["postalAddresses"] as Iterable?)
         ?.map((m) => PostalAddress.fromMap(m));
     avatar = m["avatar"];
-    try {
-      birthday = DateTime.parse(m["birthday"]);
-    } catch (e) {
+
+    var bdString = m["birthday"] as String;
+    if(m["birthday"] == null) {
       birthday = null;
+    } else {
+      // if the year is omitted android will replace it with a dash, like this:
+      // --10-01
+      // we'll replace it with 0000 to make date parsing work
+      if(bdString.startsWith('-')) {
+        bdString = bdString.replaceFirst('-', '0000');
+      }
+
+      try {
+        birthday = DateTime.parse(bdString);
+      } catch (e) {
+        birthday = null;
+      }
     }
   }
 
